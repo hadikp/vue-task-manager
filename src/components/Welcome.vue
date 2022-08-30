@@ -1,18 +1,38 @@
 <script setup>
+  import { ref } from 'vue'
+  import axios from 'axios'
+  const email = ref('hadikp@freemail.hu')
+  const password = ref('')
+  const error = ref('')
 
+  const login = () => {
+    if(!email.value || !password.value){
+      error.value = 'Töltsd ki mindkét mezőt!'
+      return
+    }
+
+    axios.post('api/user/create',
+      {
+        email: email.value,
+        password: password.value
+      }).then(resp => console.log(resp.data))
+        .catch(err => (error.value = 'Hibás bejelentkezés, próbáld meg újra'))
+  }
 </script>
 
 <template>
   <h1>taskR</h1>
+  
   <div class="df">
     <h2>A leg<strong>cool</strong>abb task kezelő evör</h2>
     <img src="../assets/vue.svg" class="logo" alt="Vue logo" />
   </div>
-  <form class="df">
+   <form class="df" v-on:submit.prevent="login" > <!-- -->
     <font-awesome-icon icon="user-astronaut" />
-    <input type="email" placeholder="email">
-    <input type="password" placeholder="password">
-    <button>login</button>
+    {{ error }} 
+    <input type="email" placeholder="email" v-model="email">
+    <input type="password" placeholder="password" v-model="password">
+     <button>login</button> <!--v-on:click="login()" -->
   </form>
 </template>
 
@@ -54,6 +74,7 @@ input {
   font-size: 1.5rem;
   border: none;
   border-radius: 0.5rem;
+  color: #fff;
   background-color: var(--inputBg);
   padding: 0.5rem;
 }
