@@ -1,11 +1,17 @@
 <script setup>
 import Welcome from './components/Welcome.vue';
+import { useUserStore } from '../stores/user'
+
+const userData = useUserStore
 </script>
 
 <template>
-<header></header>
+<header>
+  {{ userData.user }}
+</header>
 <main>
-  <Welcome />
+   <Welcome  /> <!--v-if="!userData.user.id" -->
+  <!-- <p v-if="userData.user.id">Sikeres bejelentkezés</p> -->
 </main>
 <footer></footer>
   

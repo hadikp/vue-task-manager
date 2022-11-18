@@ -1,9 +1,13 @@
 <script setup>
   import { ref } from 'vue'
   import axios from 'axios'
+  import { useUserStore } from '../../stores/user'
+
   const email = ref('hadikp@freemail.hu')
   const password = ref('')
   const error = ref('')
+
+  const userData = useUserStore()
 
   const login = () => {
     if(!email.value || !password.value){
@@ -15,7 +19,9 @@
       {
         email: email.value,
         password: password.value
-      }).then(resp => console.log(resp.data))
+      }).then(resp => 
+          (console.log(resp.data),
+          userData.user = resp.data.data.user))
         .catch(err => (error.value = 'Hibás bejelentkezés, próbáld meg újra'))
   }
 </script>
@@ -27,7 +33,7 @@
     <h2>A leg<strong>cool</strong>abb task kezelő evör</h2>
     <img src="../assets/vue.svg" class="logo" alt="Vue logo" />
   </div>
-   <form class="df" v-on:submit.prevent="login" > <!-- -->
+   <form class="df" v-on:submit.prevent="login" >  
     <font-awesome-icon icon="user-astronaut" />
     {{ error }} 
     <input type="email" placeholder="email" v-model="email">
