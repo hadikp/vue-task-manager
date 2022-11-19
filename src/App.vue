@@ -2,7 +2,7 @@
 import Welcome from './components/Welcome.vue';
 import { useUserStore } from '../stores/user'
 
-const userData = useUserStore
+const userData = useUserStore()
 </script>
 
 <template>

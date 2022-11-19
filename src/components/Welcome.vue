@@ -15,13 +15,26 @@
       return
     }
 
-    axios.post('api/user/create',
+    /* axios.post('api/user/create', //create user
       {
-        email: email.value,
-        password: password.value
+        email: password.value,
+        password: email.value
       }).then(resp => 
           (console.log(resp.data),
           userData.user = resp.data.data.user))
+        .catch(err => (error.value = 'Hibás bejelentkezés, próbáld meg újra'))
+  } */
+
+  axios.post('api/user/login', //login user
+      {
+        email:  email.value,
+        password: password.value
+      }).then(resp => {
+          console.log(resp.data)
+          
+          userData.user = resp.data
+        })
+      
         .catch(err => (error.value = 'Hibás bejelentkezés, próbáld meg újra'))
   }
 </script>
