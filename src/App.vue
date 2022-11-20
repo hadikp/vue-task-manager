@@ -1,19 +1,20 @@
 <script setup>
 import Welcome from './components/Welcome.vue';
+import AppFooter from './components/AppFooter.vue';
 import { useUserStore } from '../stores/user'
 
 const userData = useUserStore()
 </script>
 
 <template>
-<header>
+<header v-if="userData.user.id">
   {{ userData.user }}
 </header>
 <main>
-   <Welcome  /> <!--v-if="!userData.user.id" -->
-  <!-- <p v-if="userData.user.id">Sikeres bejelentkezés</p> -->
+   <Welcome v-if="!userData.user.id" /> 
+   <Tasks v-if="userData.user.id" />
 </main>
-<footer></footer>
+<AppFooter />
   
 </template>
 
