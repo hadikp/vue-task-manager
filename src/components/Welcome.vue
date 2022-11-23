@@ -25,7 +25,7 @@
         .catch(err => (error.value = 'Hibás bejelentkezés, próbáld meg újra'))
   } */
 
-  axios.post('api/user/login', //login user
+  axios.post(`${import.meta.env.VITE_APP_API_URL}login`, //login user
       {
         email:  email.value,
         password: password.value
