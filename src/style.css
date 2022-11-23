@@ -29,3 +29,7 @@ body {
   gap: 1rem;
 }
 
+ul {
+  list-style: none;
+}
+
